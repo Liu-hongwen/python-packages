@@ -1,0 +1,37 @@
+plt.figure() 创建一个绘图对象
+plt.figure(figsize=(8,4),dpi=80) 指定绘图对象的宽度和高度，单位为英寸，dpi参数指定绘图对象的分辨率，即每英寸多少像素，缺省值为80，
+所以本例创建的图表窗口宽度为8*80=640像素
+
+plt.plot(x,y,label="y=f(x)",color="red",linewidth=2) 直接绘图，matplotlib会为我们自动创建一个绘图对象
+    label：所绘制曲线的名字，此名字在图示(legend)中显示，只要在字符前后添加"$"符号，matplotlib就会使用其内嵌的latex引擎绘制的数学公式
+    color：指定曲线的颜色
+    linewidth：指定曲线的宽度
+
+plt.title("y=f(x)") 设置图表的标题
+plt.xlabel("time") 设置x轴的标签
+plt.ylabel("volt") 设置y轴的标签
+plt.ylim(1,20) 设置y轴的范围
+plt.legend(loc="best") 显示图例,loc指定图例的位置，best是自动找到最好的位置
+
+plt.bar([1,2,3,4,5],[1,3,5,7,9],width=0.5,align="center",label="bar",color="red",alpha=0.5)
+绘制柱状图，第一个参数为柱子的横坐标，第二个参数为柱子的高度,第三个参数为柱子的宽度，alpha为柱子的透明度
+rects=plt.bar([1,2,3,4,5],[1,3,5,7,9],width=0.5,align="center",label="bar",color="red",alpha=0.5)
+for rect in rects: 在柱状图上显示具体的数字
+    height=rect.get_height()
+    plt.text(rect.get_x()+rect.get_width()/4,1.01*height,'%s'%float(height))
+plt.xticks([1,2,3,4,5],["first","second","third","fourth","fifeth"]) 添加柱状图脚注
+
+plt.hist(x,bins=10,normed=False)
+绘制直方图，x指定每个bin(箱子)分布的数据，对应x轴，bins指定bin(箱子)的个数，也就是总共几条柱形，normed指定密度，也就是每个柱形的占比例，默认为False
+
+plt.scatter(x,y,s=20,c='k')
+绘制散点图，x，y是点的坐标，s表示点的大小，层表示点的颜色
+
+slices=[1,2,3,4]
+explodes=[0,0.1,0,0]
+activities=['sleeping','eating','working','playing']
+cols=['c','m','r','b']
+plt.pie(slices,labels=activities,labeldistance=1,colors=cols,explode=explodes,startangle=90,autopct='%1.1f%%',pctdistance=0.6,shadow=True,radius=3)
+绘制饼状图，slices指定每一块的比例，labels每一块的文字说明，labeldistance指定label绘制位置，>1则在饼图外侧，explode指定每一块离开中心的距离，
+startangle起始绘制角度，默认是从x轴正方向逆时针画起，如设定90则从y轴正方向画起，shadow是否阴影
+autopct控制饼图内百分比设置，pctdistance指定autopct位置，radius控制饼图半径
